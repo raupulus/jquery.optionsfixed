@@ -10,24 +10,6 @@
     <meta charset="UTF-8" />
     <title></title>
     <style type="text/css">
-
-        #boxFixed {
-            position: fixed;
-            display: block;
-            opacity: 0.6;
-            width: 50px;
-            height: 50px;
-            background: #ff0000 url("./imagen.png") no-repeat ;
-            background-size: contain;
-            border-radius: 10px;
-        }
-
-        #boxFixed:hover {
-            opacity: 1;
-            cursor: pointer;
-        }
-
-
         h1 {
             margin: auto;
             text-align: center;
@@ -48,7 +30,7 @@
     <script>
         window.onload = function() {
             $.optionsfixed({
-                'imagen' : './imagen.png',
+                'img' : './imagen.png',
                 'menu' : [
                     ['Menú1', 'www.fryntiz.es'],
                 ],
