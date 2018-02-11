@@ -10,17 +10,30 @@
     <meta charset="UTF-8" />
     <title></title>
     <style type="text/css">
+        #boxFixed {
+            display: fixed;
+            opacity: 0.6;
+            width: 50px;
+            height: 50px;
+            background-color: #ff0000;
+            border-radius: 10px;
+        }
 
+        #boxFixed:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
     </style>
     <script src="./jquery-3.2.1.js"></script>
+    <script src="./jquery.optionsfixed.js"></script>
     <script>
-    window.onload = function() {
-
-    }
+        window.onload = function() {
+            $.optionsfixed();
+        }
     </script>
 </head>
 
 <body>
-
+    <div id="boxFixed"></div>
 </body>
 </html>
