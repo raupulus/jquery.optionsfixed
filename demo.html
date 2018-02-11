@@ -10,12 +10,15 @@
     <meta charset="UTF-8" />
     <title></title>
     <style type="text/css">
+
         #boxFixed {
-            display: fixed;
+            position: fixed;
+            display: block;
             opacity: 0.6;
             width: 50px;
             height: 50px;
-            background-color: #ff0000;
+            background: #ff0000 url("./imagen.png") no-repeat ;
+            background-size: contain;
             border-radius: 10px;
         }
 
@@ -23,17 +26,51 @@
             opacity: 1;
             cursor: pointer;
         }
+
+
+        h1 {
+            margin: auto;
+            text-align: center;
+        }
+        #cajaAlta {
+            margin: 10px auto;
+            padding: 25px;
+            height: 500px;
+            font-size: 1.4em;
+            font-weight: bold;
+            background-color: cadetblue;
+            border-radius: 10px;
+            box-shadow:  5px 5px 3px #000000;
+        }
     </style>
     <script src="./jquery-3.2.1.js"></script>
     <script src="./jquery.optionsfixed.js"></script>
     <script>
         window.onload = function() {
-            $.optionsfixed();
+            $.optionsfixed({
+                'imagen' : './imagen.png',
+                'menu' : [
+                    ['Menú1', 'www.fryntiz.es'],
+                ],
+            });
         }
     </script>
 </head>
 
 <body>
-    <div id="boxFixed"></div>
+    <h1>Demo para ver funcionar plugin</h1>
+    <div id="cajaAlta">
+        <p>
+            Este es un bloque alto para permitir el scroll
+        </p>
+        <ul>
+            <li>Lista 1</li>
+            <li>Lista 2</li>
+            <li>Lista 3</li>
+        </ul>
+    </div>
+    <div id="cajaAlta">
+
+    </div>
 </body>
 </html>
