@@ -11,10 +11,24 @@
             left: '5px',
             top: '5px',
             opacity: 0.6,
+            animations: true,
         };
 
         // Reemplaza los valores introducido por el usuario
         $.extend(conf, opciones);
+
+        // TODO → Comprobar si conf.menu[0] está definido (es obligatorio 1)
+
+        // TODO → Implementar animaciones al hacer hover sobre menú
+        //        permitiendo que se pueda deshabilitar desde configuración
+
+
+        /**
+         * @var visible Esta varible contiene el estado de visibilidad del
+         *              menú, de forma que con valor true estará visible.
+         */
+        var visible = false;
+
 
         // Añadir al elemento "body" la caja con el lanzador
         $('body').append('<div id="boxFixedParent">' +
@@ -62,7 +76,15 @@
          * Esta función muestra el menú al pulsar click
          */
         function mostrarmenu() {
-            $('#boxMenuAlt').slideToggle();
+            //$('#boxMenuAlt').slideToggle(); → No es útil si quiero borrar
+                                             // al hacer click en la web
+            if (visible) {
+                visible = false;
+                $('#boxMenuAlt').slideUp();
+            } else {
+                visible = true;
+                $('#boxMenuAlt').slideDown();
+            }
         }
 
         /**
@@ -144,13 +166,21 @@
         }
         crearEnlaces();
 
-        // TODO → Ocultar menú al pulsar un click fuera del menú
-        $('body').on('click', function() {
-            console.log($('#boxMenuAlt').css('display'));
-            if ($('#boxMenuAlt').css('display') === 'block') {
-                mostrarmenu();
-            }
-        });
+        // Añade animaciones al icono del menú
+        function animarIcono() {
+
+        }
+
+        // Añade animaciones al menú interior
+        function animarInterior() {
+
+        }
+        // Si la configuración admite animaciones se aplican
+        if (animations) {
+            animarIcono();
+            animarInterior();
+        }
+
 
         return $(this);
     };
