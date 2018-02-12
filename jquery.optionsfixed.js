@@ -1,6 +1,7 @@
 (function($) {
     /**
-     *
+     * ----
+     * menu → nombre, url
      */
     $.optionsfixed = function(opciones) {
         var conf = {
@@ -40,6 +41,7 @@
             'border-radius' : '10px',
         });
 
+        // Evento Hover sobre el menú
         $('#boxFixed').hover(
             function() {
                 $(this).css({
@@ -52,6 +54,39 @@
                 });
             }
         );
+
+        // Evento Click sobre el menú
+        $('#boxFixed').on('click', mostrarmenu);
+
+        /**
+         * Esta función muestra el menú al pulsar click
+         */
+        function mostrarmenu() {
+
+        }
+
+        /**
+         * Esta función crea todos los elementos del menú
+         */
+        function createElements() {
+            var ele = '<div id="boxMenuAlt">';
+
+            for (let elemento of conf.menu) {
+                var nombre = elemento[0];
+                var enlace = elemento[1];
+
+                ele += '<p class="eleMenu">' +
+                    '<a href="' + enlace + '">' +
+                    nombre +
+                    '</a>';
+                '</p>'
+            }
+
+            ele += '</div>';
+            // Creo la caja para mostrar el menú
+            $('body').append(ele);
+        }
+        createElements();
 
         return $(this);
     };
