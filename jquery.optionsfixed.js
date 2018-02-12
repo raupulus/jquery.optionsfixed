@@ -88,6 +88,21 @@
         }
         createElements();
 
+        // Estilos para "boxMenuAlt"
+        $('#boxMenuAlt').css({
+            'position' : 'fixed',
+            'top' : '55px',
+            'left' : 0,
+            'width' : '300px',
+            'height' : '300px',
+            'background-color' : 'black',
+        });
+
+        // Estilos para cada párrafo del menú
+        $('#boxMenuAlt > .eleMenu').css({
+            'background-color' : 'red',
+        });
+
         return $(this);
     };
 })(jQuery);
