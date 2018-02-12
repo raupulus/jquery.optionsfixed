@@ -62,7 +62,7 @@
          * Esta función muestra el menú al pulsar click
          */
         function mostrarmenu() {
-            // boxMenuAlt → slideDown???
+            $('#boxMenuAlt').slideToggle();
         }
 
         /**
@@ -103,6 +103,7 @@
         $('#boxMenuAlt > .eleMenu').css({
             'padding' : '3px 4px 3px 8px',
             'background-color' : '#647e7e',
+            'cursor' : 'pointer',
         });
 
         // Estilos para cada enlace del menú
@@ -112,6 +113,39 @@
             'font-weight' : 'bold',
             'text-decoration' : 'none',
         });
+
+        // Evento Hover sobre cada elemento del menú
+        $('#boxMenuAlt > .eleMenu').hover(
+            function() {
+                $(this).css({
+                    'background-color' : '#ffffff',
+                });
+            },
+            function() {
+                $(this).css({
+                    'background-color' : '#647e7e',
+                });
+            }
+        );
+
+        // Oculta el menú al iniciar
+        $('#boxMenuAlt').hide();
+
+        /**
+         * Genera enlaces para los párrafos a partir de los enlaces <a>
+         */
+        function crearEnlaces() {
+            var enlaces = $('#boxMenuAlt > .eleMenu > a');
+            for (let enl of enlaces) {
+                console.log(enl.href);
+                $(enl).parent().on('click', function() {
+                    window.location = enl.href;
+                });
+            }
+        }
+        crearEnlaces();
+
+        // TODO → Ocultar menú al pulsar un click fuera del menú
 
         return $(this);
     };
