@@ -19,10 +19,6 @@
 
         // TODO → Comprobar si conf.menu[0] está definido (es obligatorio 1)
 
-        // TODO → Implementar animaciones al hacer hover sobre menú
-        //        permitiendo que se pueda deshabilitar desde configuración
-
-
         /**
          * @var visible Esta varible contiene el estado de visibilidad del
          *              menú, de forma que con valor true estará visible.
@@ -79,11 +75,19 @@
             //$('#boxMenuAlt').slideToggle(); → No es útil si quiero borrar
                                              // al hacer click en la web
             if (visible) {
-                visible = false;
                 $('#boxMenuAlt').slideUp();
+                visible = false;
+                $('body').off('click.ocultar');
             } else {
-                visible = true;
                 $('#boxMenuAlt').slideDown();
+                visible = true;
+
+                // Doy un retardo antes de asignar evento
+                setTimeout(function() {
+                    $('body').one('click.ocultar', function() {
+                        mostrarmenu();
+                    });
+                }, 1000);
             }
         }
 
@@ -166,6 +170,7 @@
         }
         crearEnlaces();
 
+
         // Añade animaciones al icono del menú
         function animarIcono() {
 
@@ -176,7 +181,7 @@
 
         }
         // Si la configuración admite animaciones se aplican
-        if (animations) {
+        if (conf.animations) {
             animarIcono();
             animarInterior();
         }
