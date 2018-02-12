@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+ @author Raúl Caro Pastorino
+ @copyright Copyright © 2017 Raúl Caro Pastorino
+ @license https://wwww.gnu.org/licenses/gpl.txt
+-->
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style type="text/css">
+        h1 {
+            margin: auto;
+            text-align: center;
+        }
+        #cajaAlta {
+            margin: 10px auto;
+            padding: 25px;
+            height: 500px;
+            font-size: 1.4em;
+            font-weight: bold;
+            background-color: cadetblue;
+            border-radius: 10px;
+            box-shadow:  5px 5px 3px #000000;
+        }
+    </style>
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./jquery.optionsfixed.js"></script>
+    <script>
+        window.onload = function() {
+            $.optionsfixed({
+                'img' : './imagen.png',
+                'menu' : [
+                    ['Menú1', 'http://www.fryntiz.es'],
+                    ['Menú2', 'http://www.fryntiz.es'],
+                    ['Menú3', 'http://www.fryntiz.es'],
+                ],
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Demo para ver funcionar plugin</h1>
+    <div id="cajaAlta">
+        <p>
+            Este es un bloque alto para permitir el scroll
+        </p>
+        <ul>
+            <li>Lista 1</li>
+            <li>Lista 2</li>
+            <li>Lista 3</li>
+        </ul>
+    </div>
+    <div id="cajaAlta">
+
+    </div>
+</body>
+</html>
