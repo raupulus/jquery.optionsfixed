@@ -62,7 +62,7 @@
          * Esta función muestra el menú al pulsar click
          */
         function mostrarmenu() {
-
+            // boxMenuAlt → slideDown???
         }
 
         /**
@@ -94,13 +94,23 @@
             'top' : '55px',
             'left' : 0,
             'width' : '300px',
-            'height' : '300px',
-            'background-color' : 'black',
+            'background-color' : '#000000',
+            'border-radius' : '0 6px 6px 0',
+            'box-shadow' : '3px 3px 3px #000000',
         });
 
         // Estilos para cada párrafo del menú
         $('#boxMenuAlt > .eleMenu').css({
-            'background-color' : 'red',
+            'padding' : '3px 4px 3px 8px',
+            'background-color' : '#647e7e',
+        });
+
+        // Estilos para cada enlace del menú
+        $('#boxMenuAlt > .eleMenu > a').css({
+            'width' : '100%',
+            'font-size' : '1.2em',
+            'font-weight' : 'bold',
+            'text-decoration' : 'none',
         });
 
         return $(this);
