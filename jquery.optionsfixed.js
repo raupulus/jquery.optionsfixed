@@ -11,6 +11,15 @@
      *
      * @var {String} img Ruta de la imagen que quedará flotando para que al
      *                   pulsar sobre ella sea desplegado el menú.
+     *
+     * Parámetros Opcionales:
+     * @var {String} back Color del fondo aplicado a la imagen (Por defecto no)
+     * @var {String} left Separación desde el borde izquierdo.
+     * @var {String} top  Separación desde el borde superior.
+     * @var {Float} opacity Transparencia que tendrá la imagen del menú
+     *                       mientras el ratón no pasa sobre ella.
+     * @var {Boolean} animations Define si se habilitan las animaciones, por
+     *                          defecto se encuentra habilitado (true)
      */
     $.optionsfixed = function(opciones) {
         var conf = {
