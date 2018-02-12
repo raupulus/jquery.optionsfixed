@@ -137,7 +137,6 @@
         function crearEnlaces() {
             var enlaces = $('#boxMenuAlt > .eleMenu > a');
             for (let enl of enlaces) {
-                console.log(enl.href);
                 $(enl).parent().on('click', function() {
                     window.location = enl.href;
                 });
@@ -146,6 +145,12 @@
         crearEnlaces();
 
         // TODO → Ocultar menú al pulsar un click fuera del menú
+        $('body').on('click', function() {
+            console.log($('#boxMenuAlt').css('display'));
+            if ($('#boxMenuAlt').css('display') === 'block') {
+                mostrarmenu();
+            }
+        });
 
         return $(this);
     };
