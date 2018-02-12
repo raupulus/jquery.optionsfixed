@@ -1,7 +1,16 @@
 (function($) {
     /**
-     * ----
-     * menu → nombre, url
+     * Plugin que genera un icono sobre el que pulsar para abrir un menú
+     * desplegable al que se le pueden pasar parámetros para adaptarlo a
+     * distintos entornos.
+     *
+     * Parámetros mínimos de configuración:
+     * @var {Array} menu Un array que recibe dos parámetros, primero el nombre
+     *                   que le asignaremos a este menú y en segundo lugar la
+     *                   URL a la que dirigirá su enlace.
+     *
+     * @var {String} img Ruta de la imagen que quedará flotando para que al
+     *                   pulsar sobre ella sea desplegado el menú.
      */
     $.optionsfixed = function(opciones) {
         var conf = {
@@ -17,13 +26,29 @@
         // Reemplaza los valores introducido por el usuario
         $.extend(conf, opciones);
 
-        // TODO → Comprobar si conf.menu[0] está definido (es obligatorio 1)
-
         /**
          * @var visible Esta varible contiene el estado de visibilidad del
          *              menú, de forma que con valor true estará visible.
          */
         var visible = false;
+
+        /**
+         * Comprueba los requisitos para el plugin y muestra por consola
+         * aquellos que no se cumplan.
+         */
+        function testRequisitos() {
+            // Muestra error por la consola si no le pasamos elementos al menú
+            if (conf.menu.length === 0) {
+                console.log('ERROR → El plugin jquery.optionsfixed.js necesita como mínimo 1 array para 1 entrada en el menú como mínimo.');
+            }
+
+            if (conf.img === '') {
+                console.log('ERROR → Se necesita una imagen para tener un objetivo sobre el cual pulsar para abrir el menú');
+            }
+        }
+        testRequisitos();
+
+
 
 
         // Añadir al elemento "body" la caja con el lanzador
