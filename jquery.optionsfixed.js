@@ -49,71 +49,77 @@
             // Muestra error por la consola si no le pasamos elementos al menú
             if (conf.menu.length === 0) {
                 console.log('ERROR → El plugin jquery.optionsfixed.js necesita como mínimo 1 array para 1 entrada en el menú como mínimo.');
+                return false;
             }
 
             if (conf.img === '') {
                 console.log('ERROR → Se necesita una imagen para tener un objetivo sobre el cual pulsar para abrir el menú');
+                return false;
             }
+
+            return true
         }
-        testRequisitos();
 
 
 
+        function generarHTML() {
+            // Añadir al elemento "body" la caja con el lanzador
+            $('body').append('<div id="boxFixedParent">' +
+                '<div id="boxFixed"></div>' +
+                '</div>');
 
-        // Añadir al elemento "body" la caja con el lanzador
-        $('body').append('<div id="boxFixedParent">' +
-                            '<div id="boxFixed"></div>' +
-                         '</div>');
+        }
+        generarHTML();
 
-        // Estilos para la caja "boxFixedParent"
-        $('#boxFixedParent').css({
-            'position' : 'absolute',
-            'left' : conf.left,
-            'top' : conf.top,
-        });
+        /**
+         * Agrega eventos a la estructura del plugin
+         */
+        function agregarEventos() {
 
-        // Estilos para la caja "boxFixed"
-        $('#boxFixed').css({
-            'position' : 'fixed',
-            'display' : 'block',
-            'opacity' : 0.6,
-            'width' : '50px',
-            'height' : '50px',
-            'cursor' : 'pointer',
-            'background' : conf.back + 'url("' + conf.img + '") no-repeat',
-            'background-size' : 'contain',
-            'border-radius' : '10px',
-        });
+            // Evento Hover sobre el menú
+            $('#boxFixed').hover(
+                function() {
+                    $(this).css({
+                        'opacity' : 1,
+                    });
+                },
+                function() {
+                    $(this).css({
+                        'opacity' : conf.opacity,
+                    });
+                }
+            );
 
-        // Evento Hover sobre el menú
-        $('#boxFixed').hover(
-            function() {
-                $(this).css({
-                   'opacity' : 1,
-                });
-            },
-            function() {
-                $(this).css({
-                    'opacity' : conf.opacity,
-                });
-            }
-        );
+            // Evento Click sobre el menú
+            $('#boxFixed').on('click', mostrarmenu);
 
-        // Evento Click sobre el menú
-        $('#boxFixed').on('click', mostrarmenu);
+            // Evento Hover sobre cada elemento del menú
+            $('#boxMenuAlt > .eleMenu').hover(
+                function() {
+                    $(this).css({
+                        'background-color' : '#ffffff',
+                    });
+                },
+                function() {
+                    $(this).css({
+                        'background-color' : '#647e7e',
+                    });
+                }
+            );
+        }
+        agregarEventos();
 
         /**
          * Esta función muestra el menú al pulsar click
          */
         function mostrarmenu() {
-            //$('#boxMenuAlt').slideToggle(); → No es útil si quiero borrar
-                                             // al hacer click en la web
             if (visible) {
                 $('#boxMenuAlt').slideUp();
                 visible = false;
                 $('body').off('click.ocultar');
             } else {
                 $('#boxMenuAlt').slideDown();
+                $('#boxMenuAlt').focus();
                 visible = true;
 
                 // Doy un retardo antes de asignar evento
@@ -145,81 +151,100 @@
             ele += '</div>';
             // Creo la caja para mostrar el menú
             $('body').append(ele);
+
+            /**
+             * Genera enlaces para los párrafos a partir de los enlaces <a>
+             */
+            function crearEnlaces() {
+                var enlaces = $('#boxMenuAlt > .eleMenu > a');
+                for (let enl of enlaces) {
+                    $(enl).parent().on('click', function() {
+                        window.location = enl.href;
+                    });
+                }
+            }
+            crearEnlaces();
         }
         createElements();
 
-        // Estilos para "boxMenuAlt"
-        $('#boxMenuAlt').css({
-            'position' : 'fixed',
-            'top' : '55px',
-            'left' : 0,
-            'width' : '300px',
-            'background-color' : '#000000',
-            'border-radius' : '0 6px 6px 0',
-            'box-shadow' : '3px 3px 3px #000000',
-        });
-
-        // Estilos para cada párrafo del menú
-        $('#boxMenuAlt > .eleMenu').css({
-            'padding' : '3px 4px 3px 8px',
-            'background-color' : '#647e7e',
-            'cursor' : 'pointer',
-        });
-
-        // Estilos para cada enlace del menú
-        $('#boxMenuAlt > .eleMenu > a').css({
-            'width' : '100%',
-            'font-size' : '1.2em',
-            'font-weight' : 'bold',
-            'text-decoration' : 'none',
-        });
-
-        // Evento Hover sobre cada elemento del menú
-        $('#boxMenuAlt > .eleMenu').hover(
-            function() {
-                $(this).css({
-                    'background-color' : '#ffffff',
-                });
-            },
-            function() {
-                $(this).css({
-                    'background-color' : '#647e7e',
-                });
-            }
-        );
-
-        // Oculta el menú al iniciar
-        $('#boxMenuAlt').hide();
-
         /**
-         * Genera enlaces para los párrafos a partir de los enlaces <a>
+         * Añade animaciones al icono del menú
          */
-        function crearEnlaces() {
-            var enlaces = $('#boxMenuAlt > .eleMenu > a');
-            for (let enl of enlaces) {
-                $(enl).parent().on('click', function() {
-                    window.location = enl.href;
-                });
-            }
-        }
-        crearEnlaces();
-
-
-        // Añade animaciones al icono del menú
         function animarIcono() {
 
         }
 
-        // Añade animaciones al menú interior
+        /**
+         * Añade animaciones al menú interior
+         */
         function animarInterior() {
 
         }
+
         // Si la configuración admite animaciones se aplican
         if (conf.animations) {
             animarIcono();
             animarInterior();
         }
 
+        /**
+         * Aplica los estilos CSS a los componentes del Plugin
+         */
+        function aplicarEstilos() {
+            // Estilos para la caja "boxFixedParent"
+            $('#boxFixedParent').css({
+                'position' : 'absolute',
+                'left' : conf.left,
+                'top' : conf.top,
+            });
+
+            // Estilos para la caja "boxFixed"
+            $('#boxFixed').css({
+                'position' : 'fixed',
+                'display' : 'block',
+                'opacity' : 0.6,
+                'width' : '50px',
+                'height' : '50px',
+                'cursor' : 'pointer',
+                'background' : conf.back + 'url("' + conf.img + '") no-repeat',
+                'background-size' : 'contain',
+                'border-radius' : '10px',
+            });
+
+            // Estilos para "boxMenuAlt"
+            $('#boxMenuAlt').css({
+                'position' : 'fixed',
+                'top' : '55px',
+                'left' : 0,
+                'width' : '300px',
+                'background-color' : '#000000',
+                'border-radius' : '0 6px 6px 0',
+                'box-shadow' : '3px 3px 3px #000000',
+            });
+
+            // Estilos para cada párrafo del menú
+            $('#boxMenuAlt > .eleMenu').css({
+                'padding' : '3px 4px 3px 8px',
+                'background-color' : '#647e7e',
+                'cursor' : 'pointer',
+            });
+
+            // Estilos para cada enlace del menú
+            $('#boxMenuAlt > .eleMenu > a').css({
+                'width' : '100%',
+                'font-size' : '1.2em',
+                'font-weight' : 'bold',
+                'text-decoration' : 'none',
+            });
+        }
+        aplicarEstilos();
+
+
+        // Comprobar que se cumplen los requisitos
+        testRequisitos();
+
+        // Oculta el menú al iniciar
+        $('#boxMenuAlt').hide();
 
         return $(this);
     };
