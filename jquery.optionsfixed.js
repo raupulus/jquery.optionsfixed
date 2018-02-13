@@ -78,19 +78,18 @@
                 }
             );
 
-// TODO → DEPURANDO ESTA FUNCIÓN
+// TODO → Comprobar rendimiento de esta función para cerrar menú
             // Evento Click sobre el menú
             $('#boxFixed').on('click', function() {
-                $('#boxMenuAlt').slideDown(500);
+                $('body').off('click.hide');
+                $('#boxMenuAlt').fadeIn(500);
 
-                console.log('Punto 1');
-                // Evento Cerrar menú al dar foco
-                setTimeout(3000, function() {
-                    $('body').one('click', function() {
-                        $('#boxMenuAlt').slideUp();
+                setTimeout(function() {
+                    $('body').one('click.hide', function() {
+                        $('#boxMenuAlt').fadeOut();
                     });
-                    console.log('Evento blur');
-                });
+                }, 100);
+
             });
 
             // Evento Hover sobre cada elemento del menú
