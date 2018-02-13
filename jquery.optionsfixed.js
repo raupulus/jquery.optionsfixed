@@ -1,3 +1,9 @@
+/**
+ * @author Raúl Caro Pastorino
+ * @copyright Copyright © 2017 Raúl Caro Pastorino
+ * @license https://wwww.gnu.org/licenses/gpl.txt
+ */
+
 (function($) {
     /**
      * Plugin que genera un icono sobre el que pulsar para abrir un menú
@@ -36,12 +42,6 @@
         $.extend(conf, opciones);
 
         /**
-         * @var visible Esta varible contiene el estado de visibilidad del
-         *              menú, de forma que con valor true estará visible.
-         */
-        var visible = false;
-
-        /**
          * Comprueba los requisitos para el plugin y muestra por consola
          * aquellos que no se cumplan.
          */
@@ -59,17 +59,6 @@
 
             return true
         }
-
-
-
-        function generarHTML() {
-            // Añadir al elemento "body" la caja con el lanzador
-            $('body').append('<div id="boxFixedParent">' +
-                '<div id="boxFixed"></div>' +
-                '</div>');
-
-        }
-        generarHTML();
 
         /**
          * Agrega eventos a la estructura del plugin
@@ -107,7 +96,6 @@
                 }
             );
         }
-        agregarEventos();
 
         /**
          * Esta función muestra el menú al pulsar click
@@ -164,8 +152,17 @@
                 }
             }
             crearEnlaces();
+
+            function generarHTML() {
+                // Añadir al elemento "body" la caja con el lanzador
+                $('body').append('<div id="boxFixedParent">' +
+                    '<div id="boxFixed"></div>' +
+                    '</div>');
+
+            }
+            generarHTML();
         }
-        createElements();
+
 
         /**
          * Añade animaciones al icono del menú
@@ -179,12 +176,6 @@
          */
         function animarInterior() {
 
-        }
-
-        // Si la configuración admite animaciones se aplican
-        if (conf.animations) {
-            animarIcono();
-            animarInterior();
         }
 
         /**
@@ -237,13 +228,26 @@
                 'text-decoration' : 'none',
             });
         }
+
+        // Crea la estructura HTML.
+        createElements();
+
+        // Añade eventos al menú.
+        agregarEventos();
+
+        // Aplica los estilos CSS a la estructura generada por el plugin.
         aplicarEstilos();
 
-
-        // Comprobar que se cumplen los requisitos
+        // Comprobar que se cumplen los requisitos.
         testRequisitos();
 
-        // Oculta el menú al iniciar
+        // Si la configuración admite animaciones se aplican.
+        if (conf.animations) {
+            animarIcono();
+            animarInterior();
+        }
+
+        // Oculta el menú al iniciar.
         $('#boxMenuAlt').hide();
 
         return $(this);
