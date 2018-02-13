@@ -195,7 +195,8 @@
                 'position' : 'fixed',
                 'top' : '55px',
                 'left' : 0,
-                'width' : '300px',
+                'min-width' : '150px',
+                'max-width' : '300px',
                 'background-color' : '#000000',
                 'border-radius' : '0 6px 6px 0',
                 'box-shadow' : '3px 3px 3px #000000',
@@ -211,6 +212,7 @@
             // Estilos para cada enlace del menú
             $('#boxMenuAlt > .eleMenu > a').css({
                 'width' : '100%',
+                'color' : '#ff0000',
                 'font-size' : '1.2em',
                 'font-weight' : 'bold',
                 'text-decoration' : 'none',
