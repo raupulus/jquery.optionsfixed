@@ -64,7 +64,6 @@
          * Agrega eventos a la estructura del plugin
          */
         function agregarEventos() {
-
             // Evento Hover sobre el menú
             $('#boxFixed').hover(
                 function() {
@@ -79,8 +78,20 @@
                 }
             );
 
+// TODO → DEPURANDO ESTA FUNCIÓN
             // Evento Click sobre el menú
-            $('#boxFixed').on('click', mostrarmenu);
+            $('#boxFixed').on('click', function() {
+                $('#boxMenuAlt').slideDown(500);
+
+                console.log('Punto 1');
+                // Evento Cerrar menú al dar foco
+                setTimeout(3000, function() {
+                    $('body').one('click', function() {
+                        $('#boxMenuAlt').slideUp();
+                    });
+                    console.log('Evento blur');
+                });
+            });
 
             // Evento Hover sobre cada elemento del menú
             $('#boxMenuAlt > .eleMenu').hover(
@@ -95,28 +106,6 @@
                     });
                 }
             );
-        }
-
-        /**
-         * Esta función muestra el menú al pulsar click
-         */
-        function mostrarmenu() {
-            if (visible) {
-                $('#boxMenuAlt').slideUp();
-                visible = false;
-                $('body').off('click.ocultar');
-            } else {
-                $('#boxMenuAlt').slideDown();
-                $('#boxMenuAlt').focus();
-                visible = true;
-
-                // Doy un retardo antes de asignar evento
-                setTimeout(function() {
-                    $('body').one('click.ocultar', function() {
-                        mostrarmenu();
-                    });
-                }, 1000);
-            }
         }
 
         /**
